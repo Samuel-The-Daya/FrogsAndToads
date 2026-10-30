@@ -14,7 +14,11 @@ namespace FrogToad {
 
         // TODO (student): Use canMove() to detect when no legal moves remain.
         // Check for a solution first: the solved board also has no legal moves.
-        return GameState::Playing;
+        for (auto i = 0; i < BoardModel::BoardSize; i++) {
+            if (canMove(i)) return GameState::Playing;
+        }
+
+        return GameState::Lost;
     }
 
     bool BoardModel::canMove(int index) const {
