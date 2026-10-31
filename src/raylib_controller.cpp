@@ -8,23 +8,16 @@ namespace FrogToad {
 		static_assert(BoardModel::BoardSize <= 9,
 			"Single-character commands support at most nine board cells.");
 
-		const int key{  };
+		const int key{ GetKeyPressed() };
 
-		// Arrow and function keys produce a 0 or 0xE0 prefix, then a scan code.
-		// Discard the scan code so it cannot become the next command.
-		if (key == 0 || key == 0xE0) {
-			_getch();
-			return;
-		}
-
-		if (key == 'r' || key == 'R') {
+		if (IsKeyPressed(KEY_R)) {
 			model.reset();
 			return;
 		}
 
-		if (key < '1' || key > '9' || key > '0' + BoardModel::BoardSize) {
+		if (key < KEY_ONE || key > KEY_NINE || key > KEY_ZERO + BoardModel::BoardSize) {
 			return;
-		} 
+		}
 
 		// Numbered keys select zero-based cells by subtracting '1'.
 		// In this way, '1' maps to 0, '2' to 1, '3' to 2, etc.
