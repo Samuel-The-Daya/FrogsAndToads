@@ -68,7 +68,7 @@ namespace FrogToad {
 		// Status Lines
 		switch (model.state()) {
 		case BoardModel::GameState::Solved:
-			DrawText("Solved:D R to restart.", ((windowW() - (cellSize * BoardModel::BoardSize)) / 2), windowH() / 1.5, cellSize / 3.5, BLACK);
+			DrawText("Solved :D R to restart.", ((windowW() - (cellSize * BoardModel::BoardSize)) / 2), windowH() / 1.5, cellSize / 3.5, BLACK);
 			break;
 		case BoardModel::GameState::Lost:
 			DrawText("No Legal Moves Left :( R to Restart", ((windowW() - (cellSize * BoardModel::BoardSize)) / 2), windowH() / 1.5, cellSize / 3.5, BLACK);
