@@ -1,5 +1,6 @@
 #include "raylib_controller.hpp"
 #include "raylib.h"
+#include "board_layout.hpp"
 
 namespace FrogToad {
 	void RaylibController::handleInput(BoardModel& model) {
@@ -9,6 +10,16 @@ namespace FrogToad {
 			"Single-character commands support at most nine board cells.");
 
 		const int key{ GetKeyPressed() };
+
+		const Vector2 mousePos{ GetMouseX(), GetMouseY() };
+
+		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+
+			if (BoardLayout::cellAt(mousePos) != std::nullopt) {
+				model.tryMove(BoardLayout::cellAt(mousePos).value());
+			}
+
+		}
 
 		if (IsKeyPressed(KEY_R)) {
 			model.reset();

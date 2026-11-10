@@ -6,9 +6,7 @@ namespace FrogToad {
     Rectangle BoardLayout::board() {
         // TODO by You.
 
-
-
-        return {}; // Replace with the rectangle covering all cells.
+        return { Left, Top, BoardModel::BoardSize * CellSize, CellSize}; // Replace with the rectangle covering all cells.
     }
 
     Rectangle BoardLayout::cellRect(int index) {
@@ -16,12 +14,22 @@ namespace FrogToad {
         assert(index >= 0 && index < BoardModel::BoardSize);
         
         // TODO by You.
-        return {}; // Replace with the calculated rectangle for cell at zero-based position index.
+        return { Left + (CellSize * index), Top, CellSize, CellSize}; // Replace with the calculated rectangle for cell at zero-based position index.
     }
 
     std::optional<int> BoardLayout::cellAt(Vector2 point) {
         // TODO by You. 
         
+        if (CheckCollisionPointRec(point, board())) {
+
+            for (auto i = 0; i < BoardModel::BoardSize; i++) {
+
+                if (CheckCollisionPointRec(point, cellRect(i))) {
+                    return i;
+                }
+            }
+        }
+
         // Return nullopt only when the point is off the board. You can use board() to detect this.
         return std::nullopt; 
     }
