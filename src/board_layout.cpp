@@ -20,8 +20,10 @@ namespace FrogToad {
     std::optional<int> BoardLayout::cellAt(Vector2 point) {
         // TODO by You. 
         
+        // Check collision within the board
         if (CheckCollisionPointRec(point, board())) {
 
+            // Checks which cell is point colliding with
             for (auto i = 0; i < BoardModel::BoardSize; i++) {
 
                 if (CheckCollisionPointRec(point, cellRect(i))) {

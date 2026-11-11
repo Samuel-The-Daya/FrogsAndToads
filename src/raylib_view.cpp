@@ -4,14 +4,20 @@
 
 namespace FrogToad {
 
-	
+	// Constructor
 	RaylibView::RaylibView() {
+
+		// Load Textures
 
 		frogSprite = LoadTexture("resources/frog.png");
 		toadSprite = LoadTexture("resources/toad.png");
 	}
 
+	// Destructor
 	RaylibView::~RaylibView() {
+
+		// Unload Textures if they are valid
+
 		if (IsTextureValid(frogSprite)) {
 			UnloadTexture(frogSprite);
 		}
@@ -31,21 +37,27 @@ namespace FrogToad {
 		// Instructions
 		DrawText("Toads & Frogs !!!", BoardLayout::Left, BoardLayout::Top/3, BoardLayout::CellSize/3, BLACK);
 
+		// Mouse Position Vector
 		const Vector2 mousePos{ GetMouseX(), GetMouseY() };
 
+		// If Mouse is over a cell, create a rectangle highlight
 		if (BoardLayout::cellAt(mousePos) != std::nullopt) {
 
 			DrawRectangleRec(BoardLayout::cellRect(BoardLayout::cellAt(mousePos).value()), YELLOW);
 		}
 
+		// For loop for each cell
 		for (int i = 0; i < BoardModel::BoardSize; i++)
 		{
 			// Board Row
+
+			// Draw a cell
 			DrawRectangleLinesEx(BoardLayout::cellRect(i),
 				2,
 				DARKBLUE
 			);
 
+			// Draw a circle (Lilypad !!! Inspired by Ian)
 			DrawCircle(
 				(i * BoardLayout::CellSize) + BoardLayout::Left + (BoardLayout::CellSize / 2),
 				BoardLayout::Top + (BoardLayout::CellSize / 2),
@@ -53,8 +65,9 @@ namespace FrogToad {
 				LIME
 			);
 
+			// Checks each Cell
 			switch (model.cellAt(i)) {
-			case BoardModel::Cell::Frog:
+			case BoardModel::Cell::Frog: // Frog State, Draw Frog Texture
 				DrawTexturePro(frogSprite,
 					Rectangle { 0, 0, static_cast<float>(frogSprite.width), static_cast<float>(frogSprite.height)},
 					BoardLayout::cellRect(i),
@@ -63,7 +76,7 @@ namespace FrogToad {
 					YELLOW
 					);
 				break;
-			case BoardModel::Cell::Toad:
+			case BoardModel::Cell::Toad: // Toad State, Draw Toad Texture
 				DrawTexturePro(toadSprite,
 					Rectangle{ 0, 0, static_cast<float>(toadSprite.width), static_cast<float>(toadSprite.height) },
 					BoardLayout::cellRect(i),

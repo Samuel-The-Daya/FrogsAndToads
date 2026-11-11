@@ -10,11 +10,13 @@ namespace FrogToad {
      */
     class RaylibView : public IView {
 
+        // Texture References
         Texture2D frogSprite;
         Texture2D toadSprite;
 
     public:
 
+        // Constructor & Destructor References
         RaylibView();
         ~RaylibView();
 

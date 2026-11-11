@@ -9,10 +9,15 @@ namespace FrogToad {
 		static_assert(BoardModel::BoardSize <= 9,
 			"Single-character commands support at most nine board cells.");
 
+
+		// Key Reference
 		const int key{ GetKeyPressed() };
 
+		// Mouse Vector
 		const Vector2 mousePos{ GetMouseX(), GetMouseY() };
 
+		// If Mouse Is Inputted
+		// Check the cell which the mouse is hovered over can move
 		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
 
 			if (BoardLayout::cellAt(mousePos) != std::nullopt) {
@@ -21,11 +26,13 @@ namespace FrogToad {
 
 		}
 
+		// If R Key is pressed, reset
 		if (IsKeyPressed(KEY_R)) {
 			model.reset();
 			return;
 		}
 
+		// Return when key is not within the board size
 		if (key < KEY_ONE || key > KEY_NINE || key > KEY_ZERO + BoardModel::BoardSize) {
 			return;
 		}
