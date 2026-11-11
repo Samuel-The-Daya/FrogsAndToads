@@ -325,6 +325,8 @@
     <ResourceCompile Include="src\application.rc" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="resources\hide.png" />
+    <Image Include="resources\peekaboo.png" />
     <Image Include="resources\wabbit_alpha.png" />
   </ItemGroup>
   <ItemGroup>

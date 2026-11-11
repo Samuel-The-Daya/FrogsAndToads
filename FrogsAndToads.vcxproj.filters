@@ -18,6 +18,9 @@
     <ClInclude Include="src\ansi_view.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\board_layout.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="src\board_model.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -39,12 +42,12 @@
     <ClInclude Include="src\resource_dir.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\board_layout.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\ansi_view.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\board_layout.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\board_model.cpp">
@@ -65,9 +68,6 @@
     <ClCompile Include="src\raylib_view.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\board_layout.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="src\icon.ico">
@@ -80,6 +80,12 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
+    <Image Include="resources\hide.png">
+      <Filter>Game Resource Files</Filter>
+    </Image>
+    <Image Include="resources\peekaboo.png">
+      <Filter>Game Resource Files</Filter>
+    </Image>
     <Image Include="resources\wabbit_alpha.png">
       <Filter>Game Resource Files</Filter>
     </Image>

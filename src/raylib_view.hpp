@@ -9,7 +9,15 @@ namespace FrogToad {
      * once in the constructor and unload them in the destructor.
      */
     class RaylibView : public IView {
+
+        Texture2D frogSprite;
+        Texture2D toadSprite;
+
     public:
+
+        RaylibView();
+        ~RaylibView();
+
         /** @brief Render the current model using already loaded resources. */
         void draw(const BoardModel& model) override;
 

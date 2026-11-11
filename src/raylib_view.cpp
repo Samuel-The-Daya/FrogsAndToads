@@ -5,17 +5,25 @@
 namespace FrogToad {
 
 	
-	//RaylibView::RaylibView() {
-	//	//Texture2D frogSprite{ LoadTexture("resources/hide.png") };
-	//	//Texture2D toadSprite{ LoadTexture("resources/peekaboo.png") };
-	//}
+	RaylibView::RaylibView() {
 
-	//RaylibView::~RaylibView() {
-	//	//UnloadTexture(frogSprite);
-	//}
+		frogSprite = LoadTexture("resources/frog.png");
+		toadSprite = LoadTexture("resources/toad.png");
+	}
+
+	RaylibView::~RaylibView() {
+		if (IsTextureValid(frogSprite)) {
+			UnloadTexture(frogSprite);
+		}
+
+		if (IsTextureValid(toadSprite)) {
+			UnloadTexture(toadSprite);
+		}
+		
+	}
 
 	void RaylibView::draw(const BoardModel& model) {
-		ClearBackground(RAYWHITE);
+		ClearBackground(SKYBLUE);
 		// TODO: Draw the board and game status.
 
 		std::string instructions{ "1.." + std::to_string(BoardModel::BoardSize) + " = Move & R = Restart" };
@@ -35,27 +43,37 @@ namespace FrogToad {
 			// Board Row
 			DrawRectangleLinesEx(BoardLayout::cellRect(i),
 				2,
-				DARKGRAY
+				DARKBLUE
+			);
+
+			DrawCircle(
+				(i * BoardLayout::CellSize) + BoardLayout::Left + (BoardLayout::CellSize / 2),
+				BoardLayout::Top + (BoardLayout::CellSize / 2),
+				BoardLayout::CellSize / 3,
+				LIME
 			);
 
 			switch (model.cellAt(i)) {
 			case BoardModel::Cell::Frog:
-				DrawCircle(
-					(i * BoardLayout::CellSize) + BoardLayout::Left + (BoardLayout::CellSize / 2),
-					BoardLayout::Top + (BoardLayout::CellSize /2),
-					BoardLayout::CellSize /3,
-					GREEN
-				);
+				DrawTexturePro(frogSprite,
+					Rectangle { 0, 0, static_cast<float>(frogSprite.width), static_cast<float>(frogSprite.height)},
+					BoardLayout::cellRect(i),
+					Vector2{ 0 , 0 },
+					0,
+					YELLOW
+					);
 				break;
 			case BoardModel::Cell::Toad:
-				DrawCircle(
-					(i * BoardLayout::CellSize) + BoardLayout::Left + (BoardLayout::CellSize / 2),
-					BoardLayout::Top + (BoardLayout::CellSize / 2),
-					BoardLayout::CellSize / 3,
-					DARKGREEN
+				DrawTexturePro(toadSprite,
+					Rectangle{ 0, 0, static_cast<float>(toadSprite.width), static_cast<float>(toadSprite.height) },
+					BoardLayout::cellRect(i),
+					Vector2{ 0 , 0 },
+					0,
+					ORANGE
 				);
 				break;
 			}
+
 			// Number Positions
 			DrawText(
 				std::to_string(i+1).c_str(),
@@ -70,13 +88,13 @@ namespace FrogToad {
 		// Status Lines
 		switch (model.state()) {
 		case BoardModel::GameState::Solved:
-			DrawText("Solved :D R to restart.", BoardLayout::Left, BoardLayout::Top/1.5, BoardLayout::CellSize / 3.5, BLACK);
+			DrawText("Solved :D R to restart.", BoardLayout::Left, BoardLayout::Top / 0.4 , BoardLayout::CellSize / 3.5, BLACK);
 			break;
 		case BoardModel::GameState::Lost:
-			DrawText("No Legal Moves Left :( R to Restart", BoardLayout::Left, BoardLayout::Top / 1.5, BoardLayout::CellSize / 3.5, BLACK);
+			DrawText("No Legal Moves Left :( R to Restart", BoardLayout::Left, BoardLayout::Top / 0.4, BoardLayout::CellSize / 3.5, BLACK);
 			break;
 		case BoardModel::GameState::Playing:
-			DrawText(instructions.c_str(), BoardLayout::Left, BoardLayout::Top / 1.5, BoardLayout::CellSize / 3.5, BLACK);
+			DrawText(instructions.c_str(), BoardLayout::Left, BoardLayout::Top / 0.4, BoardLayout::CellSize / 3.5, BLACK);
 			break;
 		}
 	}
